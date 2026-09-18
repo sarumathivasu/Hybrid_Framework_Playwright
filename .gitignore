@@ -31,3 +31,5 @@ downloads/
 # OS files
 .DS_Store
 Thumbs.db
+
+test_data/user_login_details.py

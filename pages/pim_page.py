@@ -16,7 +16,18 @@ class PimPage(BasePage):
 ).locator(
     "xpath=../following-sibling::div//input"
 )
+        # self.create_login_details_toggle=page.locator(".oxd-switch-wrapper")
+        self.create_login_details_toggle = page.locator(".oxd-switch-wrapper .oxd-switch-input")
+        self.create_login_details_checkbox = page.locator(".oxd-switch-wrapper input[type='checkbox']")
+
+        self.username=page.locator('label.oxd-label:has-text("Username")').locator("xpath=../following-sibling::div//input")
+        self.staus=page.locator(".oxd-radio-wrapper .oxd-radio-input ").nth(0)
+        self.password=page.locator("label.oxd-label:text-is('Password')").locator("xpath=../following-sibling::div//input")
+        self.confirm_password=page.locator("label.oxd-label:has-text('Confirm Password')").locator("xpath=../following-sibling::div//input")
+    
+
         self.save=page.get_by_role("button",name="Save")
+        
 
     def click_pim_button(self):
         self.click_pim.click()
@@ -28,6 +39,22 @@ class PimPage(BasePage):
         self.last_name.fill(last_name)
         self.employee_id.clear()
         self.employee_id.fill(employee_id)
+
+    def create_toggleon_bydynamic(self):
+        if not self.create_login_details_checkbox.is_checked():
+            self.create_login_details_toggle.click()
+    def after_toggle_on(self,username):
+        self.username.fill(username)
+
+    def select_status(self):
+        self.staus.click()
+
+    def password_method(self,password):
+        self.password.fill(password)
+
+    def confirm_password_method(self,confirm_password):
+        self.confirm_password.fill(confirm_password)
+
     def save_button(self):
         self.save.click()
     

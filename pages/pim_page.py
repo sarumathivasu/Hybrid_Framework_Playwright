@@ -11,12 +11,7 @@ class PimPage(BasePage):
         self.first_name=page.get_by_placeholder("First Name")
         self.middle_name=page.get_by_placeholder("Middle Name")
         self.last_name=page.get_by_placeholder("Last Name")
-        self.employee_id = page.locator(
-    'label.oxd-label:has-text("Employee Id")'
-).locator(
-    "xpath=../following-sibling::div//input"
-)
-        # self.create_login_details_toggle=page.locator(".oxd-switch-wrapper")
+        self.employee_id = page.locator('label.oxd-label:has-text("Employee Id")').locator("xpath=../following-sibling::div//input")
         self.create_login_details_toggle = page.locator(".oxd-switch-wrapper .oxd-switch-input")
         self.create_login_details_checkbox = page.locator(".oxd-switch-wrapper input[type='checkbox']")
 

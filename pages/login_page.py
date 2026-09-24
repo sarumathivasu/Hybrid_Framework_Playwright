@@ -8,7 +8,7 @@ from pages.base_page import BasePage
 
 
 
-# LoginPage represents the SauceDemo login page.
+# LoginPage represents the OrangeHRM login page.
 # BasePage is the parent class.
 class LoginPage(BasePage):
 

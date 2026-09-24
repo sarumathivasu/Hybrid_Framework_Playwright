@@ -1,6 +1,8 @@
 from playwright.sync_api import Page
 from pages.base_page import BasePage
-
+from config.config import EMPLOYEE_LIST_PIM_URL
+from utilities.logger import get_logger
+logger=get_logger(__name__)
 
 class PimPage(BasePage):
     def __init__(self, page):
@@ -19,9 +21,12 @@ class PimPage(BasePage):
         self.staus=page.locator(".oxd-radio-wrapper .oxd-radio-input ").nth(0)
         self.password=page.locator("label.oxd-label:text-is('Password')").locator("xpath=../following-sibling::div//input")
         self.confirm_password=page.locator("label.oxd-label:has-text('Confirm Password')").locator("xpath=../following-sibling::div//input")
-    
+        self.search_by_employee_id=page.locator("label.oxd-label:has-text('Employee Id')").locator("xpath=../following-sibling::div//input")
+
 
         self.save=page.get_by_role("button",name="Save")
+
+        self.search_button=page.get_by_role("button",name="Search")
         
 
     def click_pim_button(self):
@@ -38,6 +43,7 @@ class PimPage(BasePage):
     def create_toggleon_bydynamic(self):
         if not self.create_login_details_checkbox.is_checked():
             self.create_login_details_toggle.click()
+
     def after_toggle_on(self,username):
         self.username.fill(username)
 
@@ -52,4 +58,16 @@ class PimPage(BasePage):
 
     def save_button(self):
         self.save.click()
-    
+
+    logger.info("user created successfully")
+
+    def search_navigation(self):
+        self.page.goto(EMPLOYEE_LIST_PIM_URL)
+    logger.info("navigated to employee list to search by dynamic employeeid")
+    def search_employee_id(self,employee_id):
+        self.search_by_employee_id.fill(employee_id)
+
+    def search_button_method(self):
+        self.search_button.click()
+
+    logger.info("searched results found")
